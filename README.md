@@ -64,7 +64,7 @@ Opera – 11.5
 
                 $scope.msg = $db.session.get("msg");
 
-                console.log($db.local.has("myList"));  // true means you can work on it
+                console.log($db.local.has("msg"));  // true means you can work on it
             }]);
 
 

@@ -18,9 +18,9 @@ Opera – 11.5
 
   <!DOCTYPE html>
 
-  <html lang="en">
+    <html lang="en">
 
-  <head>
+    <head>
 
     <title>ngOpenDB</title>
 
@@ -40,9 +40,9 @@ Opera – 11.5
 
     </style>
 
-</head>
+    </head>
 
-<body  ng-app="test" ng-controller="mycontroller">
+    <body  ng-app="test" ng-controller="mycontroller">
 
     <p>{{ msg }}</p>    
 

@@ -6,7 +6,7 @@
 
 var ngOpenDB = angular.module("ngOpenDB", []);
 
-ngOpenDB.factory('Storage', function() {
+ngOpenDB.factory('Operation', function() {
    var factory = {};
 
    factory.Operation = function (storage) {
@@ -205,8 +205,57 @@ ngOpenDB.factory('Storage', function() {
    return factory;
 });
 
+ngOpenDB.factory('Cookie', function() {
+   var factory = {};
 
-ngOpenDB.service('Main', function(Storage){
+   factory.Cookie = function () {
+     var set, get, has, entire;
+
+     set = function (key, value, exdays) {
+         var d = new Date();
+         d.setTime(d.getTime() + (exdays*24*60*60*1000));
+         var expires = "expires=" + d.toGMTString();
+         document.cookie = key + "=" + value +"; " + expires;
+     };
+
+     get = function (key) {
+         var name = key + "=";
+         var ca = document.cookie.split(';');
+
+         for(var i = 0; i < ca.length; i++) {
+             var c = ca[i];
+
+             while (c.charAt(0) === ' ') c = c.substring(1);
+
+             if (c.indexOf(name) ===  0) {
+                 return c.substring(name.length, c.length);
+             }
+         }
+
+         return "";
+     };
+
+     has = function (key) {
+         return !!this.get(key);
+     };
+
+     entire = function () {
+         return document.cookie;
+     };
+
+     return {
+         get: get,
+         set: set,
+         has: has,
+         entire: entire
+     };
+   };
+
+   return factory;
+});
+
+ngOpenDB.service('Main', function(Storage, Cookie){
     this.local = Storage.Operation(localStorage);
     this.session = Storage.Operation(sessionStorage);
+    this.cookie = Cookie.Cookie();
 });

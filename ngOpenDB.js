@@ -205,6 +205,7 @@ ngOpenDB.factory('Operation', function() {
    return factory;
 });
 
+
 ngOpenDB.factory('Cookie', function() {
    var factory = {};
 
@@ -254,8 +255,19 @@ ngOpenDB.factory('Cookie', function() {
    return factory;
 });
 
-ngOpenDB.service('Main', function(Storage, Cookie){
-    this.local = Storage.Operation(localStorage);
-    this.session = Storage.Operation(sessionStorage);
+
+ngOpenDB.service('Main', ["Operation", "Cookie", function(Operation, Cookie){
+    this.local = Operation.Operation(localStorage);
+    this.session = Operation.Operation(sessionStorage);
     this.cookie = Cookie.Cookie();
-});
+
+    this.working = function () {
+
+        try {
+            return 'localStorage' in window && window['localStorage'] !== null
+                   && 'sessionStorage' in window && window['sessionStorage'] !== null;
+        } catch (e) {
+            return false;
+        }
+    };
+}]);

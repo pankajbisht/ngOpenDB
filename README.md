@@ -14,6 +14,9 @@ Safari – 4.0
 
 Opera – 11.5
 
+For more details about local storage and session storage you can read article this article - 
+http://www.wayofwebs.com/html/localstroage/
+
 #Use of local and session storage with simple example
 
   <!DOCTYPE html>
@@ -26,17 +29,8 @@ Opera – 11.5
 
     <style>
 
-        p {
-
-            color: red;
-
-        }
-
-       .span {
-
-            color: green;
-
-        }
+        p { color: red; }
+       .span { color: green; }
 
     </style>
 
